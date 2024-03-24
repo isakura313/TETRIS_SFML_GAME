@@ -31,22 +31,12 @@ int figures[7][4] =
 }; // define figures
 
 bool check() {
-    for (int i = 0; i < 4; i++) {
-        if (a[i].x < 0 || a[i].x >= N || a[i].y >= M) {
-            return 0;
-        }
-        // }else if (field[a[i].y][a[i].x]) {
-        //     if(field[a[i].y][a[i].x] ==field[b[i].y][b[i].x] ) {
-        //         std::cout << "Hello World!";
-        //     }
-        //
-        //     return 0;
-        // }
+    for (int i = 0; i < 4; i++)
+        if (a[i].x < 0 || a[i].x >= N || a[i].y >= M) return 0;
         else if (field[a[i].y][a[i].x]) return 0;
-    }
+
     return 1;
 };
-
 
 
 int main() {
@@ -54,34 +44,35 @@ int main() {
 
     RenderWindow window(VideoMode(320, 480), "Tetris");
     Music music;
-    //
-    // if (!music.openFromFile("back_sound.wav"))
-    //     return -1; // error
-    // music.play();
-    music.openFromFile("backgroundSound.wav");
+
+    music.openFromFile("music/backgroundSound.wav");
     music.setVolume(5.f);
     music.setPitch(1.f);
     music.play();
     Music musicLose;
-    musicLose.openFromFile("looseSound.wav");
+
+    musicLose.openFromFile("music/gameOver.wav");
     musicLose.setVolume(5.f);
     musicLose.setPitch(1.f);
+
     Music musicLine;
-    musicLine.openFromFile("happySound.wav");
+    musicLine.openFromFile("music/happySound.wav");
     musicLine.setVolume(5.f);
     musicLine.setPitch(1.f);
+
     Font font;
-    font.loadFromFile("playFont.ttf");
+    font.loadFromFile("fonts/playFont.ttf");
     Text text;
     text.setFont(font);
     text.setString(std::to_string(countLine));
     text.setCharacterSize(50);
     text.setFillColor(Color::White);
-    text.setPosition(260,8);
+    text.setPosition(260, 8);
+
     Texture t1, t2, t3;
-    t1.loadFromFile("tiles.png");
-    t2.loadFromFile("background1.png");
-    t3.loadFromFile("frame.png");
+    t1.loadFromFile("images/tiles.png");
+    t2.loadFromFile("images/background1.png");
+    t3.loadFromFile("images/frame.png");
 
     Sprite tiles(t1), background(t2), frame(t3);
 
@@ -93,10 +84,9 @@ int main() {
     Clock clock;
 
     while (window.isOpen()) {
-        // float time = clock.getElapsedTime().asSeconds();
-        // clock.restart();
         timer += clock.restart().asSeconds();
         Event e;
+
         while (window.pollEvent(e)) {
             if (e.type == Event::Closed) {
                 window.close();
@@ -111,23 +101,21 @@ int main() {
                 }
             }
         }
-            if (Keyboard::isKeyPressed(Keyboard::Down)) {
-                delay = 0.05;
-            }
+        if (Keyboard::isKeyPressed(Keyboard::Down)) {
+            delay = 0.05;
+        }
 
         // move
         for (int i = 0; i < 4; i++) {
-
             b[i] = a[i];
             a[i].x += dx;
-
         }
         if (!check()) {
             for (int i = 0; i < 4; i++) {
                 a[i] = b[i];
-
             }
         }
+
         // rotate
         if (rotate) {
             Point center = a[1];
@@ -143,35 +131,42 @@ int main() {
                 }
             }
         }
-        //tick
+
+        // tick
         if (timer > delay) {
             {
                 for (int i = 0; i < 4; i++) {
                     b[i] = a[i];
                     a[i].y += 1;
                 }
+
+                // Game over
                 for (int i = 0; i < 4; i++) {
                     if (field[a[i].y][a[i].x]) {
-                        if(field[a[i].y][a[i].x] ==field[b[i].y][b[i].x] ) {
+                        if (field[a[i].y][a[i].x] == field[b[i].y][b[i].x]) {
                             std::cout << "Game over!";
-                            // timer = 1000;
-                            musicLose.play();
                             music.stop();
-                            // window.clear();
-                            sleep(3);
+                            musicLose.play();
+                            // проиграть звук проигрыша
+                            // остановить главную музыку
+                            // можно еще сделать надпись Game over вместо счета
+                            sleep(sf::milliseconds(2500)); // это очевидно костыль, но пока так
                             window.close();
-                            break;
-
+                            break; // стоп loop, иначе вылетает игра
                         }
                     }
-
                 }
+                // end of game over
+
                 if (!check()) {
                     for (int i = 0; i < 4; i++) {
                         field[b[i].y][b[i].x] = colorNum;
                     }
                     colorNum = 1 + rand() % 7;
                     int n = rand() % 7;
+
+                    std::cout << std::to_string(n);
+
                     for (int i = 0; i < 4; i++) {
                         // TODO обсудить появление фигуры
                         a[i].x = figures[n][i] % 2;
@@ -183,15 +178,6 @@ int main() {
                 timer = 0;
             }
 
-            /////check lose///////
-            // for (int i= M-1; i> 0; i--) {
-            //         if(field[i][19] != 0) {
-            //             std::cout << std::to_string(field[i][19])+ ";";
-            //
-            //     }
-            //
-            // }
-            ///////check lines//////////
             int k = M - 1;
             for (int i = M - 1; i > 0; i--) {
                 int count = 0;
@@ -199,27 +185,23 @@ int main() {
                     if (field[i][j]) {
                         count++;
                     }
-                    field[k][j] = field[i][j]; // TODO позже удалить
-
+                    field[k][j] = field[i][j];
                 }
                 if (count < N) {
                     k = k - 1;
-                }
-                else {
+                } else {
                     musicLine.play();
                     countLine = countLine + 1;
                     text.setString(std::to_string(countLine));
-
                 }
-
             }
-
-
         }
+
         dx = 0;
         rotate = 0;
         delay = 0.3;
         // отрисовка?
+
         window.clear(Color::White);
         window.draw(background);
         for (int i = 0; i < M; i++)
