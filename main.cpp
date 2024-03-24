@@ -15,6 +15,11 @@ int field[M][N] = {0};
 int countLine = 0;
 int allCountLine = 0;
 
+bool escapeButtonStatus = false;
+bool pauseNow = false;
+
+
+
 struct Point {
     int x, y;
 } a[4], b[4];
@@ -46,9 +51,10 @@ int main() {
     Music music;
 
     music.openFromFile("music/backgroundSound.wav");
-    music.setVolume(5.f);
+    music.setVolume(3.f);
     music.setPitch(1.f);
     music.play();
+
     Music musicLose;
 
     musicLose.openFromFile("music/gameOver.wav");
@@ -59,6 +65,12 @@ int main() {
     musicLine.openFromFile("music/happySound.wav");
     musicLine.setVolume(5.f);
     musicLine.setPitch(1.f);
+
+    Music pauseMusic;
+    pauseMusic.openFromFile("music/pause_music.ogg");
+    pauseMusic.setVolume(5.f);
+    pauseMusic.setPitch(1.f);
+
 
     Font font;
     font.loadFromFile("fonts/playFont.ttf");
@@ -84,15 +96,37 @@ int main() {
     Clock clock;
 
     while (window.isOpen()) {
-        timer += clock.restart().asSeconds();
+
+        if (!escapeButtonStatus) {
+            timer += clock.restart().asSeconds();
+        } else {
+            music.pause();
+        }
+
         Event e;
 
         while (window.pollEvent(e)) {
             if (e.type == Event::Closed) {
                 window.close();
             }
+
+
+
             if (e.type == Event::KeyPressed) {
-                if (e.key.code == Keyboard::Up) {
+                if (e.key.code == Keyboard::Escape) {
+                    escapeButtonStatus = !escapeButtonStatus;
+                    if(escapeButtonStatus) {
+                        pauseMusic.play();
+                        music.pause();
+                    } else {
+                        pauseMusic.pause();
+                        music.play();
+                    }
+                }
+
+
+
+                else if (e.key.code == Keyboard::Up) {
                     rotate = true;
                 } else if (e.key.code == Keyboard::Left) {
                     dx = -1;
@@ -100,10 +134,14 @@ int main() {
                     dx = 1;
                 }
             }
+
         }
+
+
         if (Keyboard::isKeyPressed(Keyboard::Down)) {
             delay = 0.05;
         }
+
 
         // move
         for (int i = 0; i < 4; i++) {
@@ -133,6 +171,7 @@ int main() {
         }
 
         // tick
+
         if (timer > delay) {
             {
                 for (int i = 0; i < 4; i++) {
