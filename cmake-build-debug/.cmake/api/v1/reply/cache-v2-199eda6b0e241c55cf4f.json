@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/isakura313/Desktop/untitled/cmake-build-debug"
+			"value" : "/Users/isakura313/Desktop/tetris/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/isakura313/Desktop/untitled/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/Users/isakura313/Desktop/tetris/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/isakura313/Desktop/untitled"
+			"value" : "/Users/isakura313/Desktop/tetris"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -759,7 +759,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "14.1"
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_OSX_SYSROOT",
@@ -819,7 +819,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "untitled"
+			"value" : "tetris"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1142,7 +1142,7 @@
 			"value" : "/opt/homebrew/share/doc/SFML"
 		},
 		{
-			"name" : "untitled_BINARY_DIR",
+			"name" : "tetris_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1151,10 +1151,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/isakura313/Desktop/untitled/cmake-build-debug"
+			"value" : "/Users/isakura313/Desktop/tetris/cmake-build-debug"
 		},
 		{
-			"name" : "untitled_IS_TOP_LEVEL",
+			"name" : "tetris_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1166,7 +1166,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "untitled_SOURCE_DIR",
+			"name" : "tetris_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1175,7 +1175,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/isakura313/Desktop/untitled"
+			"value" : "/Users/isakura313/Desktop/tetris"
 		}
 	],
 	"kind" : "cache",

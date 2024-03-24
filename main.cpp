@@ -65,9 +65,9 @@ int main() {
     Text text;
     text.setFont(font);
     text.setString(std::to_string(countLine));
-    text.setCharacterSize(50);
-    text.setFillColor(Color::White);
-    text.setPosition(260, 8);
+    text.setCharacterSize(30);
+    text.setFillColor(Color::Red);
+    text.setPosition(260, 440);
 
     Texture t1, t2, t3;
     t1.loadFromFile("images/tiles.png");
@@ -147,9 +147,6 @@ int main() {
                             std::cout << "Game over!";
                             music.stop();
                             musicLose.play();
-                            // проиграть звук проигрыша
-                            // остановить главную музыку
-                            // можно еще сделать надпись Game over вместо счета
                             sleep(sf::milliseconds(2500)); // это очевидно костыль, но пока так
                             window.close();
                             break; // стоп loop, иначе вылетает игра
@@ -165,10 +162,8 @@ int main() {
                     colorNum = 1 + rand() % 7;
                     int n = rand() % 7;
 
-                    std::cout << std::to_string(n);
 
                     for (int i = 0; i < 4; i++) {
-                        // TODO обсудить появление фигуры
                         a[i].x = figures[n][i] % 2;
                         a[i].y = figures[n][i] / 2;
                     }

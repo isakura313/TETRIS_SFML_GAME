@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "untitled",
+					"name" : "tetris",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "untitled::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-untitled-Debug-16558042b5fb409266ef.json",
-					"name" : "untitled",
+					"id" : "tetris::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-tetris-Debug-7fb0d2d2ec5971cc8e21.json",
+					"name" : "tetris",
 					"projectIndex" : 0
 				}
 			]
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/isakura313/Desktop/untitled/cmake-build-debug",
-		"source" : "/Users/isakura313/Desktop/untitled"
+		"build" : "/Users/isakura313/Desktop/tetris/cmake-build-debug",
+		"source" : "/Users/isakura313/Desktop/tetris"
 	},
 	"version" : 
 	{
